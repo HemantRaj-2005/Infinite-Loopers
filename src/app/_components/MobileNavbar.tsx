@@ -1,19 +1,22 @@
 "use client"
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const items = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#" },
-    { label: "Contact", href: "#" },
-    { label: "Blogs", href: "#" },
-    { label: "Suggestion Box", href: "#" },
-    { label: "Event Tracker", href: "#" },
-    { label: "Dashboard", href: "#" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+    { label: "Blogs", href: "/blogs" },
+    { label: "Suggestion Box", href: "/suggestion-box" },
+    { label: "Event Tracker", href: "/event-tracker" },
+    { label: "Roadmap", href: "/roadmap" },
+    { label: "Dashboard", href: "/dashboard" },
   ];
 
 function MobileNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -59,7 +62,9 @@ function MobileNavbar() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="block py-2 text-gray-200 hover:text-cyan-300"
+                className={`block py-2 text-gray-200 hover:text-cyan-300 ${
+                  pathname === item.href ? 'text-cyan-300 font-bold' : ''
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
